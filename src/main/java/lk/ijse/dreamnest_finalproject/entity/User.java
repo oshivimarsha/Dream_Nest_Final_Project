@@ -10,7 +10,6 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name = "systemuser")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,9 +18,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uid;
     @Column(unique = true)
-    private String firstName;
-    private String lastName;
-    private String country;
+    private String name;
     private String email;
     private String password;
     private String role;
