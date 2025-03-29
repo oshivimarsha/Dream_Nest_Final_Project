@@ -29,17 +29,14 @@ public class PlaceController {
 
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> savePlaceCategory(@RequestParam("name") String name,
-                                                         @RequestParam("categoryID") String categoryID,
                                                          @RequestParam("description") String description,
                                                          @RequestParam("location") String location,
                                                          @RequestParam("latitude") String latitude,
                                                          @RequestParam("longitude") String longitude,
-                                                         @RequestParam("imageFiles") List<
-                                                                 MultipartFile> imageFiles) {
+                                                         @RequestParam("imageFiles") List<MultipartFile> imageFiles) {
         try {
             PlaceDTO place = new PlaceDTO();
             place.setName(name);
-            place.setCategoryID(categoryID);
             place.setDescription(description);
             place.setLocation(location);
             place.setLatitude(latitude);

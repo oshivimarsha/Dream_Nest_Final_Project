@@ -25,7 +25,7 @@ public class HotelServiceIMPL implements HotelService {
     public int saveHotel(HotelDTO hotelDTO) {
         try {
             Hotel hotel = new Hotel(
-                    placeRepository.findById(Long.valueOf(hotelDTO.getPlaceID())).get(),
+                    placeRepository.findById((Long.valueOf(hotelDTO.getPlaceID()))).get(),
                     hotelDTO.getName(),
                     hotelDTO.getDescription(),
                     hotelDTO.getLocation(),

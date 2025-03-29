@@ -7,14 +7,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
 public class PlaceDTO {
     private String id;
     private String name;
-    private String categoryID;
     private String description;
     private String location;
     private String latitude;
@@ -23,7 +22,6 @@ public class PlaceDTO {
 
     public PlaceDTO(String name, String categoryID, String description, String location, String latitude, String longitude, List<String> image) {
         this.name = name;
-        this.categoryID = categoryID;
         this.description = description;
         this.location = location;
         this.latitude = latitude;
@@ -34,7 +32,6 @@ public class PlaceDTO {
     public PlaceDTO(String id, String name, String categoryID, String description, String location, String latitude, String longitude) {
         this.id = id;
         this.name = name;
-        this.categoryID = categoryID;
         this.description = description;
         this.location = location;
         this.latitude = latitude;

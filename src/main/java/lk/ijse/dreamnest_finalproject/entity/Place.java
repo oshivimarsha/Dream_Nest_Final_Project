@@ -1,6 +1,5 @@
 package lk.ijse.dreamnest_finalproject.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,10 +17,6 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @JsonIgnore
-    private PlaceCategory category;
     private String description;
     private String location;
     private String latitude;
@@ -32,9 +27,8 @@ public class Place {
     @Column(name = "image_path")
     private List<String> image;
 
-    public Place(String name, PlaceCategory category, String description, String location, String latitude, String longitude, List<String> image) {
+    public Place(String name, String description, String location, String latitude, String longitude, List<String> image) {
         this.name = name;
-        this.category = category;
         this.description = description;
         this.location = location;
         this.latitude = latitude;

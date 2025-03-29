@@ -2,7 +2,6 @@ package lk.ijse.dreamnest_finalproject.service.impl;
 
 import lk.ijse.dreamnest_finalproject.dto.PlaceDTO;
 import lk.ijse.dreamnest_finalproject.entity.Place;
-import lk.ijse.dreamnest_finalproject.repo.PlaceCategoryRepository;
 import lk.ijse.dreamnest_finalproject.repo.PlaceRepository;
 import lk.ijse.dreamnest_finalproject.service.PlaceService;
 import lk.ijse.dreamnest_finalproject.util.VarList;
@@ -17,8 +16,6 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Autowired
     private PlaceRepository placeRepository;
-    @Autowired
-    private PlaceCategoryRepository placeCategoryRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -35,7 +32,7 @@ public class PlaceServiceImpl implements PlaceService {
             // Map DTO to entity
            /* Place placeEntity = modelMapper.map(place, Place.class);
             placeEntity.setCategory(placeRepository.findBy(place.getCategoryID()).get());*/
-            Place placeEntity = new Place(place.getName(), placeCategoryRepository.findById(place.getCategoryID()).get(), place.getDescription(), place.getLocation(), place.getLatitude(), place.getLongitude(), place.getImage());
+            Place placeEntity = new Place(place.getName(), place.getDescription(), place.getLocation(), place.getLatitude(), place.getLongitude(), place.getImage());
 
             // Save the place
             placeRepository.save(placeEntity);
