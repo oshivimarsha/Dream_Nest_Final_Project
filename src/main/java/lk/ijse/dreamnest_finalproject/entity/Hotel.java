@@ -20,6 +20,7 @@ public class Hotel {
     @ManyToOne
     private Place placeID;
     private String name;
+    private String email;
     private String description;
     private String location;
     private String latitude;
@@ -29,9 +30,10 @@ public class Hotel {
             joinColumns = @JoinColumn(name = "hotel_id"))
     private List<String> image;
 
-    public Hotel(Place placeID, String name, String description, String location, String latitude, String longitude, List<String> image) {
+    public Hotel(Place placeID, String name, String email, String description, String location, String latitude, String longitude, List<String> image) {
         this.placeID = placeID;
         this.name = name;
+        this.email = email;
         this.description = description;
         this.location = location;
         this.latitude = latitude;
@@ -43,6 +45,7 @@ public class Hotel {
         this.id = id;
         this.placeID = placeID;
         this.name = name;
+        this.email = email;
         this.description = description;
         this.location = location;
         this.latitude = latitude;

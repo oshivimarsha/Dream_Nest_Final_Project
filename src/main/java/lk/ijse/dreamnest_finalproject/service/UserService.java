@@ -8,5 +8,8 @@ public interface UserService {
     UserDTO searchUser(String username);
 
     void deleteUser(String email);
+    Object getAllUser();
+
+    int resetPassword(UserDTO exuser);
 
 }

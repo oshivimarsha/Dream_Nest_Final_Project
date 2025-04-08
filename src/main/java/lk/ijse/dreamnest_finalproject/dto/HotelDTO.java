@@ -14,16 +14,18 @@ public class HotelDTO {
     private Long id;
     private String placeID;
     private String name;
+    private String email;
     private String description;
     private String location;
     private String latitude;
     private String longitude;
     private List<String> image;
 
-    public HotelDTO(Long id, String placeID, String name, String description, String location, String latitude, String longitude) {
+    public HotelDTO(Long id, String placeID, String name, String email, String description, String location, String latitude, String longitude) {
         this.id = id;
         this.placeID = placeID;
         this.name = name;
+        this.email = email;
         this.description = description;
         this.location = location;
         this.latitude = latitude;

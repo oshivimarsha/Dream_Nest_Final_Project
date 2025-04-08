@@ -69,6 +69,27 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public Object getAllUser() {
+        try {
+            return userRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int resetPassword(UserDTO exuser) {
+        if (!userRepository.existsByEmail(exuser.getEmail())) {
+            return VarList.Not_Acceptable;
+        } else {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            exuser.setPassword(passwordEncoder.encode(exuser.getPassword()));
+            userRepository.updatepassword(exuser.getUsername(),exuser.getPassword());
+            return VarList.Created;
+        }
+    }
+
+    @Override
     public int saveUser(UserDTO userDTO) {
         if (userRepository.existsByEmail(userDTO.getEmail())) {
             return VarList.Not_Acceptable;

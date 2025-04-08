@@ -17,8 +17,8 @@ import java.util.UUID;
 @ToString
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uid;
     @Column(unique = true)
     private String username;
     private String email;

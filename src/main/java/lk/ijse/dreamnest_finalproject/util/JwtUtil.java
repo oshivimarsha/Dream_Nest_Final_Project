@@ -3,6 +3,7 @@ package lk.ijse.dreamnest_finalproject.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lk.ijse.dreamnest_finalproject.dto.HotelDTO;
 import lk.ijse.dreamnest_finalproject.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -66,6 +67,13 @@ public class JwtUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role",userDTO.getRole());
         return doGenerateToken(claims, userDTO.getEmail());
+    }
+
+    //generate token for hotel
+    public String generateToken(HotelDTO hotelDTO) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("name",hotelDTO.getName());
+        return doGenerateToken(claims, hotelDTO.getEmail());
     }
 
     //while creating the token -

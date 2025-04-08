@@ -27,6 +27,7 @@ public class HotelServiceIMPL implements HotelService {
             Hotel hotel = new Hotel(
                     placeRepository.findById((Long.valueOf(hotelDTO.getPlaceID()))).get(),
                     hotelDTO.getName(),
+                    hotelDTO.getEmail(),
                     hotelDTO.getDescription(),
                     hotelDTO.getLocation(),
                     hotelDTO.getLatitude(),

@@ -20,6 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @EnableWebSecurity
@@ -51,9 +53,12 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/api/v1/password/sentOTP",
                                 "/api/v1/auth/authenticate",
-                                "/api/v1/user/register",
+                                "/api/v1/user/**",
                                 "/api/v1/auth/refreshToken",
                                 "/api/v1/place/**",
+                                "/api/v1/hotel/**",
+                                "/api/v1/cab/**",
+                                "/api/v1/HotelBooking/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
@@ -69,11 +74,21 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:63342"); // Add your frontend origin here
+        config.addAllowedOrigin("http://localhost:63342"); // Add your frontend origin here 63342
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
+    @Configuration
+    public class WebConfig implements WebMvcConfigurer {
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            registry.addResourceHandler("/uploads/**")
+                    .addResourceLocations("file:uploads/");
+        }
+    }
+
 
 }
