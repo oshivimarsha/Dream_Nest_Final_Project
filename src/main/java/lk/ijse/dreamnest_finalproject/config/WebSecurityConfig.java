@@ -58,6 +58,8 @@ public class WebSecurityConfig {
                                 "/api/v1/place/**",
                                 "/api/v1/hotel/**",
                                 "/api/v1/cab/**",
+                                "/api/v1/room/**",
+                                "/api/v1/roomType/**",
                                 "/api/v1/HotelBooking/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

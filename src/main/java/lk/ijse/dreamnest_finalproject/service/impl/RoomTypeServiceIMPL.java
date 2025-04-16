@@ -20,16 +20,28 @@ public class RoomTypeServiceIMPL implements RoomTypeService {
 
     @Override
     public int saveRoomType(RoomTypeDTO roomTypeDTO) {
-        try{
-            if (roomTypeRepository.existsById(roomTypeDTO.getId())) {
-                return VarList.Bad_Gateway;
+        try {
+            // ID null na nam check karanna
+            if (roomTypeDTO.getId() != null && roomTypeRepository.existsById(roomTypeDTO.getId())) {
+                return VarList.Bad_Gateway; // Duplicate ID
             }
-            roomTypeRepository.save(modelMapper.map(roomTypeDTO, RoomType.class));
-            return VarList.OK;
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+
+            // DTO eka entity ekakata map karanna
+            RoomType roomType = modelMapper.map(roomTypeDTO, RoomType.class);
+
+            // RoomType save karanna
+            roomTypeRepository.save(roomType);
+
+            return VarList.Created; // Success
+
+        } catch (Exception e) {
+            // Exception eka print karanna (print karala mekata error message eka danna)
+            e.printStackTrace(); // Exception eka print karanna
+
+            return VarList.Bad_Gateway; // Error
         }
     }
+
 
     @Override
     public int updateRoomType(RoomTypeDTO roomTypeDTO) {
