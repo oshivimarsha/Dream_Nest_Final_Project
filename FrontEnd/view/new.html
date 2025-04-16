@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2b4865;
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        .place-details {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #4a89dc;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #3a70c0;
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hotel-image {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.05);
+        }
+
+        .hotel-details {
+            padding: 20px;
+        }
+
+        .hotel-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .hotel-location {
+            color: #666;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .hotel-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 14px;
+            height: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .hotel-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2b4865;
+            margin-bottom: 15px;
+        }
+
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .rating-stars {
+            color: #f8d64e;
+            letter-spacing: 2px;
+        }
+
+        .rating-number {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .book-now {
+            display: block;
+            width: 100%;
+            background-color: #4a89dc;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .book-now:hover {
+            background-color: #3a70c0;
+        }
+
+        .no-hotels {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            color: #666;
+            grid-column: 1 / -1;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        .error {
+            background-color: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-container">
+        <h1>Hotels</h1>
+    </div>
+
+    <a href="index.html" class="back-button">← Back to Places</a>
+
+    <div class="place-details" id="placeInfo">
+        <h2 id="placeName">Loading place details...</h2>
+        <p id="placeLocation"></p>
+    </div>
+
+    <div class="hotels-grid" id="hotelsGrid">
+        <!-- Hotels will be loaded here -->
+        <div class="no-hotels">Loading hotels...</div>
+    </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeId = urlParams.get('placeId');
+        const hotelsGrid = document.getElementById('hotelsGrid');
+        const placeName = document.getElementById('placeName');
+        const placeLocation = document.getElementById('placeLocation');
+        const notification = document.getElementById('notification');
+
+        // Show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Fetch place details
+        function fetchPlaceDetails() {
+            if (!placeId) {
+                showNotification('No place ID specified', 'error');
+                placeName.textContent = 'Error: No place selected';
+                return;
+            }
+
+            // Try API first, if fails use mock data
+            fetch(`http://localhost:8080/api/v1/place/getById/${placeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 200 && data.data) {
+                        placeName.textContent = data.data.name;
+                        placeLocation.textContent = `📍 ${data.data.location}`;
+                        fetchHotelsForPlace(placeId);
+                    } else {
+                        showNotification('API unavailable, using mock data', 'error');
+                        // Use mock place data
+                        placeName.textContent = 'Sample Place';
+                        placeLocation.textContent = '📍 Sample Location';
+                        loadMockHotels();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('API unavailable, using mock data', 'error');
+                    // Use mock place data
+                    placeName.textContent = 'Sample Place';
+                    placeLocation.textContent = '📍 Sample Location';
+                    loadMockHotels();
+                });
+        }
+
+        // Fetch hotels for a specific place
+        function fetchHotelsForPlace(placeId) {
+            fetch(`http://localhost:8080/api/v1/hotel/getByPlace/${placeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 200) {
+                        displayHotels(data.data);
+                    } else {
+                        showNotification('Error loading hotels: ' + data.message, 'error');
+                        loadMockHotels(); // Fallback to mock data
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('Failed to load hotels from API, using mock data', 'error');
+                    loadMockHotels(); // Fallback to mock data
+                });
+        }
+
+        // Display hotels in grid
+        function displayHotels(hotels) {
+            hotelsGrid.innerHTML = '';
+
+            if (!hotels || hotels.length === 0) {
+                hotelsGrid.innerHTML = '<div class="no-hotels">No hotels found for this place.</div>';
+                return;
+            }
+
+            hotels.forEach(hotel => {
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+
+                // Generate star rating
+                const stars = '★'.repeat(hotel.rating) + '☆'.repeat(5 - hotel.rating);
+
+                hotelCard.innerHTML = `
+                    <div class="hotel-image">
+                        <img src="${hotel.image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${hotel.name}">
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <div class="hotel-location">📍 ${hotel.address}</div>
+                        <div class="hotel-rating">
+                            <span class="rating-stars">${stars}</span>
+                            <span class="rating-number">(${hotel.rating}/5)</span>
+                        </div>
+                        <p class="hotel-description">${hotel.description}</p>
+                        <div class="hotel-price">$${hotel.price} per night</div>
+                        <a href="booking.html?hotelId=${hotel.hotelID}" class="book-now">Book Now</a>
+                    </div>
+                `;
+
+                hotelsGrid.appendChild(hotelCard);
+            });
+        }
+
+        // Mock data for testing when API is not available
+        function loadMockHotels() {
+            const mockHotels = [
+                {
+                    hotelID: 1,
+                    name: "Luxury Resort & Spa",
+                    address: "123 Beach Road",
+                    description: "A luxurious resort with stunning ocean views, world-class amenities, and exceptional service.",
+                    price: 299,
+                    rating: 5,
+                    image: "https://via.placeholder.com/300x200?text=Luxury+Resort"
+                },
+                {
+                    hotelID: 2,
+                    name: "City Center Hotel",
+                    address: "456 Main Street",
+                    description: "Located in the heart of the city, this modern hotel offers comfort and convenience for business and leisure travelers.",
+                    price: 189,
+                    rating: 4,
+                    image: "https://via.placeholder.com/300x200?text=City+Center"
+                },
+                {
+                    hotelID: 3,
+                    name: "Mountain View Lodge",
+                    address: "789 Highland Avenue",
+                    description: "Nestled in the mountains, our lodge provides a peaceful retreat with breathtaking views and outdoor activities.",
+                    price: 220,
+                    rating: 4,
+                    image: "https://via.placeholder.com/300x200?text=Mountain+Lodge"
+                },
+                {
+                    hotelID: 4,
+                    name: "Seaside Inn",
+                    address: "101 Ocean Drive",
+                    description: "A charming inn by the sea offering comfortable rooms, delicious cuisine, and a relaxing atmosphere.",
+                    price: 159,
+                    rating: 3,
+                    image: "https://via.placeholder.com/300x200?text=Seaside+Inn"
+                }
+            ];
+
+            displayHotels(mockHotels);
+        }
+
+        // Initialize the page
+        fetchPlaceDetails();
+    });
+</script>
+</body>
+</html>

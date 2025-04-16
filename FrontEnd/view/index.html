@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Hotel Booking Mastery | DreamNest</title>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav__bar">
+        <div class="nav__header">
+            <div class="logo nav__logo">
+                <div>D</div>
+                <span>DREAM<br />NEST</span>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#room">Room</a></li>
+            <li><a href="#feature">Feature</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li>
+                <button class="login-btn">
+                    <i class="ri-login-box-line"></i> <a href="login.html">Login</a>
+                </button>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="video-container">
+    <video autoplay loop muted playsinline>
+        <source src="../assests/image/header.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<header class="header" id="home">
+    <a href="AdminDashboard.html">Admin Dashboard</a>
+    <div class="section__container header__container">
+        <p class="section__subheader">ABOUT US</p>
+        <h1>The Perfect<br />Base For You</h1>
+        <button class="btn">Take A Tour</button>
+    </div>
+</header>
+
+<!-- Search Form -->
+<div class="search-container">
+    <form class="search-form">
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" placeholder="Where are you going?">
+        </div>
+        <div class="form-group">
+            <label for="check-in">Check In</label>
+            <input type="date" id="check-in">
+        </div>
+        <div class="form-group">
+            <label for="check-out">Check Out</label>
+            <input type="date" id="check-out">
+        </div>
+        <div class="form-group">
+            <label for="guests">Guests</label>
+            <select id="guests">
+                <option value="1">1 Adult</option>
+                <option value="2">2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4 Adults</option>
+                <option value="family">2 Adults, 2 Children</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>&nbsp;</label>
+            <button type="submit" class="search-btn">Search</button>
+        </div>
+    </form>
+</div>
+
+<!-- --------------------------------------- About Section ------------------------------------------ -->
+<!-- About Section -->
+<section class="about-section">
+    <div class="about-container">
+        <div class="about-image">
+            <img src="../assests/image/img.png" alt="Beautiful coastal view">
+        </div>
+        <div class="about-content">
+            <h2>Discover New Horizons</h2>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="about">ABOUT US</button>
+                    <button class="tab-btn" data-tab="why">WHY CHOOSE US</button>
+                    <button class="tab-btn" data-tab="mission">OUR MISSION</button>
+                </div>
+
+                <div class="tab-content active" id="about-tab">
+                    <p>Wonder Tour is committed to bringing our clients the best in value and quality travel arrangements. We are passionate about travel and sharing the world's wonders with you.</p>
+                    <p>Founded in 2010, we've been creating memorable experiences for travelers from all walks of life. Our team of experienced travel experts handpick each destination and activity to ensure authentic and enriching experiences.</p>
+                </div>
+
+                <div class="tab-content" id="why-tab">
+                    <p>With Wonder Tour, you're not just another customer – you're part of our travel family. We pride ourselves on personalized service and attention to detail that larger agencies simply cannot match.</p>
+                    <p>Our local expertise, competitive pricing, and 24/7 support ensure that your journey is smooth, enjoyable, and exceeds your expectations. We work with trusted partners to deliver exceptional experiences.</p>
+                </div>
+
+                <div class="tab-content" id="mission-tab">
+                    <p>Our mission is to inspire and enable people to explore the world, experience different cultures, and create lifelong memories through responsible travel.</p>
+                    <p>We believe travel has the power to transform lives, foster understanding between cultures, and contribute positively to the destinations we visit. We're committed to sustainable tourism practices that respect local communities and preserve natural environments.</p>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <a href="#" class="btn-primary">Get in Touch</a>
+                <a href="#" class="btn-secondary">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- --------------------------------------- Top Destination Section ------------------------------------------ -->
+<div class="container">
+    <div class="feature__container">
+        <p class="section__subheader">Sri Lanka</p>
+        <h2 class="section__header">Top Places</h2>
+    </div>
+
+    <div class="places-container">
+        <div class="places-carousel" id="placesCarousel">
+            <button class="carousel-control prev-btn" id="prevBtn">❮</button>
+            <div class="carousel-inner" id="carouselInner">
+                <!-- Places will be added here dynamically -->
+            </div>
+            <button class="carousel-control next-btn" id="nextBtn">❯</button>
+        </div>
+    </div>
+</div>
+
+<!-- View Place Details Modal -->
+<div class="modal-overlay detail-modal" id="viewPlaceModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title" id="detailTitle">Place Details</h3>
+            <button class="modal-close" id="closeViewModal">&times;</button>
+        </div>
+        <div class="modal-body" id="placeDetails">
+            <!-- Place details will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<!-- --------------------------------------- Core Features Section ------------------------------------------ -->
+<section class="section__container feature__container" id="feature">
+    <p class="section__subheader">FACILITIES</p>
+    <h2 class="section__header">Core Features</h2>
+    <div class="feature__grid">
+        <div class="feature__card">
+            <span><i class="ri-thumb-up-line"></i></span>
+            <h4>Have High Rating</h4>
+            <p>
+                We take pride in curating a selection of hotels that consistently
+                receive high ratings and positive reviews.
+            </p>
+        </div>
+        <div class="feature__card">
+            <span><i class="ri-time-line"></i></span>
+            <h4>Quite Hours</h4>
+            <p>
+                We understand that peace and uninterrupted rest are essential for a
+                rejuvenating experience.
+            </p>
+        </div>
+        <div class="feature__card">
+            <span><i class="ri-map-pin-line"></i></span>
+            <h4>Best Location</h4>
+            <p>
+                At our hotel booking website, we take pride in offering
+                accommodations in the most prime and sought-after locations.
+            </p>
+        </div>
+        <div class="feature__card">
+            <span><i class="ri-close-circle-line"></i></span>
+            <h4>Free Cancellation</h4>
+            <p>
+                We understand that travel plans can change unexpectedly, which is
+                why we offer the flexibility of free cancellation.
+            </p>
+        </div>
+        <div class="feature__card">
+            <span><i class="ri-wallet-line"></i></span>
+            <h4>Payment Options</h4>
+            <p>
+                Our hotel booking website offers a range of convenient payment
+                options to suit your preferences.
+            </p>
+        </div>
+        <div class="feature__card">
+            <span><i class="ri-coupon-line"></i></span>
+            <h4>Special Offers</h4>
+            <p>
+                Whether you're planning a romantic getaway, or a business trip, our
+                carefully curated special offers cater to all your needs.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- --------------------------------------- Customer Review Section ------------------------------------------ -->
+<section class="reviews-section">
+    <div class="container-image"></div>
+    <div class="reviews-container">
+        <h2 class="section-title">What Our Customers Say</h2>
+
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <div class="review-card">
+                        <div class="testimonial-text">
+                            We stayed at a 5-star hotel in Nuwara Eliya through Ekaka. The service was excellent and prices were very reasonable. Will definitely use Ekaka for our next trip!
+                        </div>
+                        <div class="customer-info">
+                            <img class="customer-image" src="../assests/image/avatar-3.png" alt="Customer">
+                            <div class="customer-details">
+                                <div class="customer-name">Nimali Perera</div>
+                                <div class="customer-location">Colombo, Sri Lanka</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="review-card">
+                        <div class="testimonial-text">
+                            Our family found the best hotel in Galle through Ekaka. It was close to the beach with a beautiful swimming pool. Perfect location and excellent amenities!
+                        </div>
+                        <div class="customer-info">
+                            <img class="customer-image" src="../assests/image/avatar-2.png" alt="Customer">
+                            <div class="customer-details">
+                                <div class="customer-name">Kasun Rathnayake</div>
+                                <div class="customer-location">Kandy, Sri Lanka</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="review-card">
+                        <div class="testimonial-text">
+                            Ekaka helped us find the best rates for our stay. We booked the best hotel in Ella for about 15% less than other booking sites. The booking process was quick and easy.
+                        </div>
+                        <div class="customer-info">
+                            <img class="customer-image" src="../assests/image/avatar-1.png" alt="Customer">
+                            <div class="customer-details">
+                                <div class="customer-name">Ishara Silva</div>
+                                <div class="customer-location">Galle, Sri Lanka</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="nav-button prev">❮</button>
+            <button class="nav-button next">❯</button>
+
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- --------------------------------------- Search Section ------------------------------------------ -->
+
+
+
+
+<!-- --------------------------------------- Search Section ------------------------------------------ -->
+
+
+
+
+<!-- --------------------------------------- Search Section ------------------------------------------ -->
+<footer class="footer">
+    <div class="section__container footer__container">
+        <div class="footer__col">
+            <div class="logo footer__logo">
+                <div>H</div>
+                <span>HOTEL<br />MIRANDA</span>
+            </div>
+            <p class="section__description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
+                laudantium unde. Doloremque eaque debitis laborum labore voluptates
+                iste molestiae consectetur.
+            </p>
+            <ul class="footer__socials">
+                <li>
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__col">
+            <h4>Services</h4>
+            <div class="footer__links">
+                <li><a href="#">Online Booking</a></li>
+                <li><a href="#">Room Customization</a></li>
+                <li><a href="#">Virtual Tours</a></li>
+                <li><a href="#">Special Offers</a></li>
+                <li><a href="#">Concierge Services</a></li>
+                <li><a href="#">Customer Support</a></li>
+            </div>
+        </div>
+        <div class="footer__col">
+            <h4>Contact Us</h4>
+            <div class="footer__links">
+                <li>
+                    <span><i class="ri-phone-fill"></i></span>
+                    <div>
+                        <h5>Phone Number</h5>
+                        <p>+91 9876543210</p>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="ri-record-mail-line"></i></span>
+                    <div>
+                        <h5>Email</h5>
+                        <p>info@hotelmiranda.com</p>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="ri-map-pin-2-fill"></i></span>
+                    <div>
+                        <h5>Location</h5>
+                        <p>First St. NYC</p>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="footer__bar">
+        Copyright © 2023 Web Design Mastery. All rights reserved.
+    </div>
+</footer>
+
+<script src="../lib/jquery-3.7.1.min.js"></script>
+<!-- About Script -->
+<script>
+    // Tab Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // Show the corresponding tab content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId + '-tab').classList.add('active');
+            });
+        });
+
+        // Sticky header functionality
+        const header = document.querySelector('header');
+        const hero = document.querySelector('.hero');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Top Destination Script -->
+<script>
+    const slider = document.getElementById('slider');
+    let slidePosition = 0;
+    const cardWidth = 320; // card width + gap
+    const visibleCards = 3;
+    const totalCards = 5;
+
+    function slideLeft() {
+        if (slidePosition > 0) {
+            slidePosition--;
+            updateSliderPosition();
+        }
+    }
+
+    function slideRight() {
+        if (slidePosition < totalCards - visibleCards) {
+            slidePosition++;
+            updateSliderPosition();
+        }
+    }
+
+    function updateSliderPosition() {
+        slider.style.transform = `translateX(-${slidePosition * cardWidth}px)`;
+    }
+</script>
+
+<!-- Core Features -->
+<script>
+    // Optional JavaScript for enhanced interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureCards = document.querySelectorAll('.feature-card');
+
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+
+<!-- Customer Review-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentSlide = 0;
+        const slider = document.querySelector('.slider');
+        const dots = document.querySelectorAll('.dot');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+
+        // Initial setup
+        updateSlider();
+
+        // Auto slide function
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        // Set interval for auto sliding - every 5 seconds
+        let slideInterval = setInterval(autoSlide, 5000);
+
+        // Update slider position and active dot
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 33.33}%)`;
+
+            // Update active dot
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Previous slide button
+        prevBtn.addEventListener('click', function() {
+            clearInterval(slideInterval);
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+            slideInterval = setInterval(autoSlide, 5000);
+        });
+
+        // Next slide button
+        nextBtn.addEventListener('click', function() {
+            clearInterval(slideInterval);
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+            slideInterval = setInterval(autoSlide, 5000);
+        });
+
+        // Dot navigation
+        dots.forEach(function(dot, index) {
+            dot.addEventListener('click', function() {
+                clearInterval(slideInterval);
+                currentSlide = index;
+                updateSlider();
+                slideInterval = setInterval(autoSlide, 5000);
+            });
+        });
+    });
+
+
+    function navigateToResults() {
+        // Navigate to your desired page
+        window.location.href = 'hotelCard.html';
+
+        // You can also pass parameters if needed
+        // window.location.href = 'results.html?param1=value1&param2=value2';
+    }
+
+</script>
+
+<script src="../js/place.js"></script>
+<script src="../js/placeCard.js"></script>
+</body>
+</html>

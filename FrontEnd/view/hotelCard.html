@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <title>Hotels | DreamNest</title>
+    <style>
+        :root {
+            --primary-color: #0f1a2c;
+            --secondary-color: #14afb7;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --extra-light: #f8fafc;
+            --white: #ffffff;
+            --max-width: 1200px;
+            --header-font: "Playfair Display", serif;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .section__container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 5rem 1rem;
+        }
+
+        .section__header {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: var(--header-font);
+            color: var(--text-dark);
+        }
+
+        .section__description {
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            color: var(--white);
+            background-color: var(--secondary-color);
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-light);
+            letter-spacing: 2px;
+        }
+
+        .logo div {
+            padding-inline: 12px;
+            font-size: 2rem;
+        }
+
+        img, video {
+            width: 100%;
+            display: flex;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html, body {
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: var(--header-font);
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: #0e8c92;
+        }
+
+        /* Hotel Section */
+        .hotels-section {
+            padding: 30px 0 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .hotels-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hotels-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hotels-title {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-family: var(--header-font);
+            font-weight: 800;
+        }
+
+        .hotels-subtitle {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Hotel Card */
+        .hotel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .hotel-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.05);
+        }
+
+        .hotel-content {
+            padding: 20px;
+        }
+
+        .hotel-name {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .hotel-location i {
+            color: var(--secondary-color);
+        }
+
+        .hotel-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .hotel-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .view-details-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .view-details-btn:hover {
+            background-color: #0e8c92;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            border: 5px solid rgba(20, 175, 183, 0.2);
+            border-radius: 50%;
+            border-top: 5px solid var(--secondary-color);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffefef;
+            border-radius: 10px;
+            color: #e74c3c;
+            grid-column: 1 / -1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+        }
+
+        .footer__container {
+            display: grid;
+            gap: 4rem 2rem;
+        }
+
+        .footer__logo {
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .footer__logo div {
+            background-color: var(--secondary-color);
+        }
+
+        .footer__socials {
+            list-style: none;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer__socials a {
+            padding: 6px 10px;
+            font-size: 1.25rem;
+            color: var(--text-light);
+            background-color: var(--white);
+            border-radius: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer__socials a:hover {
+            color: var(--white);
+            background-color: var(--secondary-color);
+        }
+
+        .footer__col h4 {
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            font-family: var(--header-font);
+            color: var(--white);
+        }
+
+        .footer__links {
+            list-style: none;
+        }
+
+        .footer__links li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer__links a {
+            color: var(--text-light);
+            transition: 0.3s;
+        }
+
+        .footer__links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer__col:last-child .footer__links li {
+            margin-bottom: 2rem;
+        }
+
+        .footer__links span {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .footer__links h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: var(--header-font);
+            color: var(--white);
+        }
+
+        .footer__links p {
+            color: var(--text-light);
+        }
+
+        .footer__bar {
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.success {
+            background-color: #2ecc71;
+        }
+
+        .notification.error {
+            background-color: #e74c3c;
+        }
+
+        /* Responsive */
+        @media (width > 768px) {
+            .hotels-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-title {
+                font-size: 4.5rem;
+            }
+
+            .footer__container {
+                grid-template-columns: 2fr repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hotels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hotels-title {
+                font-size: 2rem;
+            }
+
+            .footer__container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Discover Your Perfect Stay</h1>
+        <p class="hero-subtitle">Experience luxury, comfort, and exceptional service at our handpicked hotels across Sri Lanka</p>
+        <a href="#hotels" class="hero-btn">Explore Hotels</a>
+    </div>
+</section>
+
+<!-- Hotels Section -->
+<section id="hotels" class="hotels-section">
+    <div class="hotels-container">
+        <div class="hotels-header">
+            <h2 class="hotels-title">Our Handpicked Hotels</h2>
+            <p class="hotels-subtitle">Discover a wide range of accommodations tailored to provide you with comfort, luxury, and memorable experiences during your stay</p>
+        </div>
+
+        <div class="hotels-grid" id="hotels-grid">
+            <!-- Loading spinner (will be replaced with hotel cards) -->
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading hotels...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notification -->
+<div id="notification" class="notification"></div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="section__container footer__container">
+        <div class="footer__col">
+            <div class="logo footer__logo">
+                <div>D</div>
+                <span>DREAM<br />NEST</span>
+            </div>
+            <p class="section__description">
+                Discover the perfect stay with DreamNest. We offer a curated selection of hotels that provide exceptional comfort and luxury for your memorable trip experiences.
+            </p>
+            <ul class="footer__socials">
+                <li>
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__col">
+            <h4>Services</h4>
+            <div class="footer__links">
+                <li><a href="#">Online Booking</a></li>
+                <li><a href="#">Room Customization</a></li>
+                <li><a href="#">Virtual Tours</a></li>
+                <li><a href="#">Special Offers</a></li>
+                <li><a href="#">Concierge Services</a></li>
+                <li><a href="#">Customer Support</a></li>
+            </div>
+        </div>
+        <div class="footer__col">
+            <h4>Contact Us</h4>
+            <div class="footer__links">
+                <li>
+                    <span><i class="ri-phone-fill"></i></span>
+                    <div>
+                        <h5>Phone Number</h5>
+                        <p>+94 112 345 678</p>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="ri-mail-line"></i></span>
+                    <div>
+                        <h5>Email</h5>
+                        <p>info@dreamnest.com</p>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="ri-map-pin-2-fill"></i></span>
+                    <div>
+                        <h5>Location</h5>
+                        <p>Colombo, Sri Lanka</p>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="footer__bar">
+        Copyright © 2025 DreamNest. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hotels grid and notification element
+        const hotelsGrid = document.getElementById('hotels-grid');
+        const notification = document.getElementById('notification');
+
+        // Backend URL - update with your actual backend URL
+        const backendUrl = 'http://localhost:8080';
+
+        // Function to show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Function to fetch hotels from API
+        async function fetchHotels() {
+            try {
+                const response = await fetch(`${backendUrl}/api/v1/hotel/getAll`);
+                const data = await response.json();
+
+                if (data.code === 200 && Array.isArray(data.data)) {
+                    return data.data;
+                } else {
+                    throw new Error('Invalid response from server');
+                }
+            } catch (error) {
+                console.error('Error fetching hotels:', error);
+                showNotification('Failed to load hotels. Please try again later.', 'error');
+                return [];
+            }
+        }
+
+        // Function to display hotels
+        function displayHotels(hotels) {
+            // Clear loading spinner
+            hotelsGrid.innerHTML = '';
+
+            if (!hotels || hotels.length === 0) {
+                hotelsGrid.innerHTML = `
+                        <div class="error-message">
+                            <i class="ri-information-line"></i> No hotels available at the moment.
+                        </div>
+                    `;
+                return;
+            }
+
+            // Create hotel cards
+            hotels.forEach(hotel => {
+                // Create hotel card
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+
+                // Handle hotel image
+                let imageHtml = '';
+                if (hotel.image && hotel.image.length > 0) {
+                    // Use the first image from the hotel's image array
+                    const imagePath = hotel.image[0];
+                    const imageUrl = imagePath.startsWith('http')
+                        ? imagePath
+                        : `${backendUrl}/${imagePath}`;
+
+                    imageHtml = `
+                            <div class="hotel-image">
+                                <img src="${imageUrl}" alt="${hotel.name}" onerror="this.parentNode.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;color:#666;font-size:14px;\\'>No Image Available</div>';">
+                            </div>
+                        `;
+                } else {
+                    // Creating a div for no image instead of using placeholder.com
+                    imageHtml = `
+                            <div class="hotel-image">
+                                <div style="height:100%;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;color:#666;font-size:14px;">
+                                    No Image Available
+                                </div>
+                            </div>
+                        `;
+                }
+
+                // Prepare description with fallback
+                const description = hotel.description
+                    ? (hotel.description.length > 150
+                        ? hotel.description.substring(0, 150) + '...'
+                        : hotel.description)
+                    : '';
+
+                // Set hotel card content - only using data from backend
+                hotelCard.innerHTML = `
+                        ${imageHtml}
+                        <div class="hotel-content">
+                            <h3 class="hotel-name">${hotel.name || 'Unnamed Hotel'}</h3>
+
+                            <div class="hotel-location">
+                                <i class="ri-map-pin-line"></i>
+                                ${hotel.location || 'Location not specified'}
+                            </div>
+
+                            <p class="hotel-description">${description}</p>
+
+                            <div class="hotel-footer">
+                                <a href="roomCard.html?id=${hotel.id}" class="view-details-btn">View Details</a>
+                            </div>
+                        </div>
+                    `;
+
+                // Add card to grid
+                hotelsGrid.appendChild(hotelCard);
+            });
+        }
+
+        // Initialize page - fetch and display hotels
+        async function initPage() {
+            try {
+                const hotels = await fetchHotels();
+                displayHotels(hotels);
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                hotelsGrid.innerHTML = `
+                        <div class="error-message">
+                            <i class="ri-error-warning-line"></i> Something went wrong. Please refresh the page and try again.
+                        </div>
+                    `;
+            }
+        }
+
+        // Start the page initialization
+        initPage();
+
+        // Function to display hotels
+        function displayHotels(hotels) {
+            // Clear loading spinner
+            hotelsGrid.innerHTML = '';
+
+            if (!hotels || hotels.length === 0) {
+                hotelsGrid.innerHTML = `
+            <div class="error-message">
+                <i class="ri-information-line"></i> No hotels available at the moment.
+            </div>
+        `;
+                return;
+            }
+
+            // Static hotel images to use when backend images aren't available
+            const staticImages = [
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070',
+                'https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=2070',
+                'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070',
+                'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070',
+                'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2070'
+            ];
+
+            // Create hotel cards
+            hotels.forEach((hotel, index) => {
+                // Create hotel card
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+
+                // Use static image based on index (cycling through the array)
+                const imageIndex = index % staticImages.length;
+                const imageUrl = staticImages[imageIndex];
+
+                const imageHtml = `
+            <div class="hotel-image">
+                <img src="${imageUrl}" alt="${hotel.name || 'Hotel Image'}">
+            </div>
+        `;
+
+                // Prepare description with fallback
+                const description = hotel.description
+                    ? (hotel.description.length > 150
+                        ? hotel.description.substring(0, 150) + '...'
+                        : hotel.description)
+                    : 'Experience luxury and comfort in this beautiful hotel with stunning views and excellent amenities.';
+
+                // Set hotel card content - using data from backend but with static images
+                hotelCard.innerHTML = `
+            ${imageHtml}
+            <div class="hotel-content">
+                <h3 class="hotel-name">${hotel.name || 'Luxury Beach Resort'}</h3>
+
+                <div class="hotel-location">
+                    <i class="ri-map-pin-line"></i>
+                    ${hotel.location || 'Colombo, Sri Lanka'}
+                </div>
+
+                <p class="hotel-description">${description}</p>
+
+                <div class="hotel-footer">
+                    <a href="roomCard.html?id=${hotel.id}" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        `;
+
+                // Add card to grid
+                hotelsGrid.appendChild(hotelCard);
+            });
+        }
+    });
+</script>
+</body>
+</html>
