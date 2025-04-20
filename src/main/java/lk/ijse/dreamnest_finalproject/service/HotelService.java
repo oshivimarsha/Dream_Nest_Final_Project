@@ -16,4 +16,5 @@ public interface HotelService {
 
     int deleteHotel(Long hotelID);
 
+    List<HotelDTO> getHotelsByPlaceId(String placeId);
 }

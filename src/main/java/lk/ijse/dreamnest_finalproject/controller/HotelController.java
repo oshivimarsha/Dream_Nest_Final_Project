@@ -174,7 +174,21 @@ public class HotelController {
         }
     }
 
+    @GetMapping("/byPlace/{placeId}")
+    public ResponseEntity<ResponseDTO> getHotelsByPlaceId(@PathVariable String placeId) {
+        try {
+            List<HotelDTO> hotels = hotelService.getHotelsByPlaceId(placeId);
 
+            if (hotels != null && !hotels.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseDTO(VarList.OK, "Success", hotels));
+            } else {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseDTO(VarList.Not_Found, "No hotels found for this place", null));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
 }
-
-

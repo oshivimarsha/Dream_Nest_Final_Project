@@ -8,10 +8,12 @@ import lk.ijse.dreamnest_finalproject.repo.PlaceRepository;
 import lk.ijse.dreamnest_finalproject.service.HotelService;
 import lk.ijse.dreamnest_finalproject.util.VarList;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelServiceIMPL implements HotelService {
@@ -75,5 +77,24 @@ public class HotelServiceIMPL implements HotelService {
             return VarList.Bad_Gateway;
         }
     }
+
+    @Override
+    public List<HotelDTO> getHotelsByPlaceId(String placeId) {
+        try {
+            // Convert placeId from String to Long
+            Long placeIdLong = Long.parseLong(placeId);
+
+            // Get hotels using repository method
+            List<Hotel> hotels = hotelRepository.findByPlaceIDId(placeIdLong);
+
+            // Map to DTOs and return
+            return modelMapper.map(hotels, new TypeToken<List<HotelDTO>>(){}.getType());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid place ID format: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving hotels by place ID: " + e.getMessage());
+        }
+    }
+
 
 }

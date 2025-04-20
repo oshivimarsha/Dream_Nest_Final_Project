@@ -58,6 +58,7 @@ public class WebSecurityConfig {
                                 "/api/v1/auth/refreshToken",
                                 "/api/v1/place/**",
                                 "/api/v1/hotel/**",
+                                "/api/v1/hotel/byPlace/{placeId}",
                                 "/api/v1/cab/**",
                                 "/api/v1/room/**",
                                 "/api/v1/roomType/**",
