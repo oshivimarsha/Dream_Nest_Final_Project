@@ -1,14 +1,21 @@
 package lk.ijse.dreamnest_finalproject.service.impl;
 
+import lk.ijse.dreamnest_finalproject.dto.HotelDTO;
+import lk.ijse.dreamnest_finalproject.dto.RoomDTO;
 import lk.ijse.dreamnest_finalproject.dto.RoomTypeDTO;
+import lk.ijse.dreamnest_finalproject.entity.Hotel;
+import lk.ijse.dreamnest_finalproject.entity.Room;
 import lk.ijse.dreamnest_finalproject.entity.RoomType;
 import lk.ijse.dreamnest_finalproject.repo.RoomTypeRepository;
 import lk.ijse.dreamnest_finalproject.service.RoomTypeService;
 import lk.ijse.dreamnest_finalproject.util.VarList;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -71,4 +78,5 @@ public class RoomTypeServiceIMPL implements RoomTypeService {
             return VarList.Bad_Gateway;
         }
     }
+
 }

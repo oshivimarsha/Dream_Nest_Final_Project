@@ -18,6 +18,7 @@ public class RoomType {
     private Long id;
     private String room_type;
     private String description;
+
     @ElementCollection
     @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_type_id"))
     @Column(name = "amenities")

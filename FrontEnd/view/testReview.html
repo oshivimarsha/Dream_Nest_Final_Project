@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Customer Reviews Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            color: #333;
+            font-size: 42px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a6bdf, #82b1ff);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slider {
+            overflow: hidden;
+            position: relative;
+            height: 450px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 800px;
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.5s ease;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-info {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #4a6bdf;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+            overflow: hidden;
+        }
+
+        .user-avatar .initials {
+            font-weight: 600;
+        }
+
+        .user-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .review-date {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .quote-icon {
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+            margin-top: -20px;
+            line-height: 1;
+            font-family: 'Georgia', serif;
+        }
+
+        .review-text {
+            font-size: 20px;
+            line-height: Ņ1.7;
+            margin-bottom: 30px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            position: relative;
+        }
+
+        .review-text::before, .review-text::after {
+            content: '"';
+            font-size: 24px;
+            font-family: 'Georgia', serif;
+            opacity: 0.7;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 22px;
+            margin-top: -20px;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 5;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: white;
+            position: relative;
+            z-index: 2;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .navigation-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .arrow {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+        }
+
+        .arrow:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .error-message {
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .section-title p {
+                font-size: 16px;
+            }
+
+            .review-text {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+            .slide {
+                padding: 40px 20px;
+            }
+
+            .user-name {
+                font-size: 20px;
+            }
+
+            .user-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 30px;
+            }
+
+            .navigation-arrows {
+                padding: 0 10px;
+            }
+
+            .arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .testimonial-slider {
+                height: 500px;
+            }
+
+            .review-text {
+                font-size: 16px;
+                max-width: 100%;
+            }
+
+            .navigation-arrows {
+                top: auto;
+                bottom: 30px;
+                padding: 0 30px;
+            }
+
+            .dots {
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="section-title">
+        <h2>What Our Customers Say</h2>
+        <p>Read genuine feedback from our valued customers and discover why they choose us.</p>
+    </div>
+
+    <div class="testimonial-slider">
+        <div class="slides-container" id="slidesContainer">
+            <div class="slide" style="background-image: linear-gradient(135deg, #4a6bdf, #82b1ff);">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading reviews...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-arrows">
+            <div class="arrow" id="prevArrow">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="arrow" id="nextArrow">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="dots" id="dots"></div>
+    </div>
+</div>
+
+<script>
+    const API_URL = 'http://localhost:8080/api/v1/reviews/public';
+
+    const slidesContainer = document.getElementById('slidesContainer');
+    const dotsContainer = document.getElementById('dots');
+    const prevArrow = document.getElementById('prevArrow');
+    const nextArrow = document.getElementById('nextArrow');
+
+    let reviews = [];
+    let currentSlide = 0;
+    let slideInterval;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Background options
+    const backgroundImages = [
+        '/images/reviews/bg1.jpg',
+        '/images/reviews/bg2.jpg',
+        '/images/reviews/bg3.jpg',
+        '/images/reviews/bg4.jpg',
+        '/images/reviews/bg5.jpg'
+    ];
+
+    // Fallback background gradients if images fail to load
+    const backgroundGradients = [
+        'linear-gradient(135deg, #4a6bdf, #82b1ff)',
+        'linear-gradient(135deg, #6a3093, #a044ff)',
+        'linear-gradient(135deg, #11998e, #38ef7d)',
+        'linear-gradient(135deg, #fc5c7d, #6a82fb)',
+        'linear-gradient(135deg, #2b5876, #4e4376)'
+    ];
+
+    function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'N/A';
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+
+    function getInitials(name) {
+        if (!name || name === 'Anonymous') return 'A';
+        return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+    }
+
+    async function fetchReviews() {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error(`Failed to fetch reviews: ${response.status}`);
+            const data = await response.json();
+            reviews = data;
+            renderSlides();
+            startSlideShow();
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            slidesContainer.innerHTML = `
+                <div class="slide" style="background-image: linear-gradient(135deg, #4a6bdf, #82b1ff);">
+                    <div class="slide-content">
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
+                            <p class="review-text">Failed to load reviews. Please try again later.</p>
+                            <button style="padding: 10px 20px; background-color: white; color: #4a6bdf; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: 500;" onclick="fetchReviews()">Retry</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    function createStarRating(rating) {
+        let stars = '';
+        const numRating = Number(rating) || 0;
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= numRating) {
+                stars += '<span class="star"><i class="fas fa-star"></i></span>';
+            } else if (i - 0.5 <= numRating) {
+                stars += '<span class="star"><i class="fas fa-star-half-alt"></i></span>';
+            } else {
+                stars += '<span class="star" style="color: rgba(255, 255, 255, 0.3);"><i class="far fa-star"></i></span>';
+            }
+        }
+
+        return stars;
+    }
+
+    function renderSlides() {
+        if (reviews.length === 0) {
+            slidesContainer.innerHTML = `
+                <div class="slide" style="background-image: linear-gradient(135deg, #4a6bdf, #82b1ff);">
+                    <div class="slide-content">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <p class="review-text">No reviews available at the moment.</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        slidesContainer.innerHTML = '';
+        dotsContainer.innerHTML = '';
+
+        reviews.forEach((review, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+
+            // Set background image with fallback
+            const bgImage = backgroundImages[index % backgroundImages.length];
+            const bgGradient = backgroundGradients[index % backgroundGradients.length];
+
+            // Try to load image first, use gradient as fallback
+            const img = new Image();
+            img.onload = () => {
+                slide.style.backgroundImage = `url('${bgImage}')`;
+            };
+            img.onerror = () => {
+                slide.style.backgroundImage = bgGradient;
+            };
+            img.src = bgImage;
+
+            // Set fallback initially
+            slide.style.backgroundImage = bgGradient;
+
+            const slideContent = document.createElement('div');
+            slideContent.className = 'slide-content';
+
+            const userInfo = document.createElement('div');
+            userInfo.className = 'user-info';
+
+            const userAvatar = document.createElement('div');
+            userAvatar.className = 'user-avatar';
+            const initials = document.createElement('span');
+            initials.className = 'initials';
+            initials.textContent = getInitials(review.customerName);
+            userAvatar.appendChild(initials);
+
+            const userName = document.createElement('div');
+            userName.className = 'user-name';
+            userName.textContent = review.customerName || 'Anonymous';
+
+            const reviewDate = document.createElement('div');
+            reviewDate.className = 'review-date';
+            reviewDate.textContent = formatDate(review.create_at);
+
+            userInfo.appendChild(userAvatar);
+            userInfo.appendChild(userName);
+            userInfo.appendChild(reviewDate);
+
+            const quoteIcon = document.createElement('div');
+            quoteIcon.className = 'quote-icon';
+            quoteIcon.innerHTML = '<i class="fas fa-quote-left"></i>';
+
+            const reviewText = document.createElement('p');
+            reviewText.className = 'review-text';
+            reviewText.textContent = review.comment || 'No comment provided';
+
+            const rating = document.createElement('div');
+            rating.className = 'rating';
+            rating.innerHTML = createStarRating(review.rating || 5);
+
+            slideContent.appendChild(userInfo);
+            slideContent.appendChild(quoteIcon);
+            slideContent.appendChild(reviewText);
+            slideContent.appendChild(rating);
+
+            slide.appendChild(slideContent);
+            slidesContainer.appendChild(slide);
+
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        updateSlidePosition();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlidePosition();
+        updateDots();
+        resetInterval();
+    }
+
+    function updateSlidePosition() {
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function updateDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % reviews.length;
+        updateSlidePosition();
+        updateDots();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + reviews.length) % reviews.length;
+        updateSlidePosition();
+        updateDots();
+    }
+
+    function startSlideShow() {
+        if (reviews.length <= 1) return;
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startSlideShow();
+    }
+
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+    }
+
+    function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }
+
+    function handleSwipe() {
+        if (touchStartX - touchEndX > 50) {
+            nextSlide();
+        } else if (touchEndX - touchStartX > 50) {
+            prevSlide();
+        }
+        resetInterval();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchReviews();
+
+        slidesContainer.addEventListener('touchstart', handleTouchStart, false);
+        slidesContainer.addEventListener('touchend', handleTouchEnd, false);
+
+        prevArrow.addEventListener('click', prevSlide);
+        nextArrow.addEventListener('click', nextSlide);
+    });
+</script>
+</body>
+</html>

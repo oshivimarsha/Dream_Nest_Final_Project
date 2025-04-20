@@ -15,18 +15,15 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    //@JsonIgnore
     private Hotel hotel;
+
     @ManyToOne
     private RoomType room_type;
     private String price;
     private String totalRooms;
     private String availableRooms;
-
-  /*  @ElementCollection
-    @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_id"))
-    private List<String> bookings;*/
 
     public Room(Hotel hotel, RoomType room_type, String price, String totalRooms, String availableRooms) {
         this.hotel = hotel;

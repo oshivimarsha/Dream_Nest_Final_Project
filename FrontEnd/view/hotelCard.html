@@ -587,16 +587,30 @@
             }, 3000);
         }
 
+        // Static hotel images to use as fallbacks when backend images aren't available
+        const fallbackImages = [
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070',
+            'https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=2070',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070',
+            'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070',
+            'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2070'
+        ];
+
         // Function to fetch hotels from API
         async function fetchHotels() {
             try {
                 const response = await fetch(`${backendUrl}/api/v1/hotel/getAll`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
                 const data = await response.json();
 
                 if (data.code === 200 && Array.isArray(data.data)) {
                     return data.data;
                 } else {
-                    throw new Error('Invalid response from server');
+                    throw new Error('Invalid response format from server');
                 }
             } catch (error) {
                 console.error('Error fetching hotels:', error);
@@ -612,69 +626,63 @@
 
             if (!hotels || hotels.length === 0) {
                 hotelsGrid.innerHTML = `
-                        <div class="error-message">
-                            <i class="ri-information-line"></i> No hotels available at the moment.
-                        </div>
-                    `;
+                    <div class="error-message">
+                        <i class="ri-information-line"></i> No hotels available at the moment.
+                    </div>
+                `;
                 return;
             }
 
             // Create hotel cards
-            hotels.forEach(hotel => {
+            hotels.forEach((hotel, index) => {
                 // Create hotel card
                 const hotelCard = document.createElement('div');
                 hotelCard.className = 'hotel-card';
 
                 // Handle hotel image
                 let imageHtml = '';
+                let imageUrl = '';
+
+                // First try to use hotel image from backend
                 if (hotel.image && hotel.image.length > 0) {
                     // Use the first image from the hotel's image array
                     const imagePath = hotel.image[0];
-                    const imageUrl = imagePath.startsWith('http')
+                    imageUrl = imagePath.startsWith('http')
                         ? imagePath
                         : `${backendUrl}/${imagePath}`;
-
-                    imageHtml = `
-                            <div class="hotel-image">
-                                <img src="${imageUrl}" alt="${hotel.name}" onerror="this.parentNode.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;color:#666;font-size:14px;\\'>No Image Available</div>';">
-                            </div>
-                        `;
                 } else {
-                    // Creating a div for no image instead of using placeholder.com
-                    imageHtml = `
-                            <div class="hotel-image">
-                                <div style="height:100%;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;color:#666;font-size:14px;">
-                                    No Image Available
-                                </div>
-                            </div>
-                        `;
+                    // Use fallback image if no image is available
+                    imageUrl = fallbackImages[index % fallbackImages.length];
                 }
+
+                imageHtml = `
+                    <div class="hotel-image">
+                        <img src="${imageUrl}" alt="${hotel.name}" onerror="this.src='${fallbackImages[index % fallbackImages.length]}'">
+                    </div>
+                `;
 
                 // Prepare description with fallback
                 const description = hotel.description
                     ? (hotel.description.length > 150
                         ? hotel.description.substring(0, 150) + '...'
                         : hotel.description)
-                    : '';
+                    : 'Experience luxury and comfort in this beautiful hotel with stunning views and excellent amenities.';
 
-                // Set hotel card content - only using data from backend
+                // Set hotel card content
                 hotelCard.innerHTML = `
-                        ${imageHtml}
-                        <div class="hotel-content">
-                            <h3 class="hotel-name">${hotel.name || 'Unnamed Hotel'}</h3>
-
-                            <div class="hotel-location">
-                                <i class="ri-map-pin-line"></i>
-                                ${hotel.location || 'Location not specified'}
-                            </div>
-
-                            <p class="hotel-description">${description}</p>
-
-                            <div class="hotel-footer">
-                                <a href="roomCard.html?id=${hotel.id}" class="view-details-btn">View Details</a>
-                            </div>
+                    ${imageHtml}
+                    <div class="hotel-content">
+                        <h3 class="hotel-name">${hotel.name || 'Luxury Hotel'}</h3>
+                        <div class="hotel-location">
+                            <i class="ri-map-pin-line"></i>
+                            ${hotel.location || 'Colombo, Sri Lanka'}
                         </div>
-                    `;
+                        <p class="hotel-description">${description}</p>
+                        <div class="hotel-footer">
+                            <a href="roomCard.html?id=${hotel.id}" class="view-details-btn">View Details</a>
+                        </div>
+                    </div>
+                `;
 
                 // Add card to grid
                 hotelsGrid.appendChild(hotelCard);
@@ -689,85 +697,15 @@
             } catch (error) {
                 console.error('Error initializing page:', error);
                 hotelsGrid.innerHTML = `
-                        <div class="error-message">
-                            <i class="ri-error-warning-line"></i> Something went wrong. Please refresh the page and try again.
-                        </div>
-                    `;
+                    <div class="error-message">
+                        <i class="ri-error-warning-line"></i> Something went wrong. Please refresh the page and try again.
+                    </div>
+                `;
             }
         }
 
         // Start the page initialization
         initPage();
-
-        // Function to display hotels
-        function displayHotels(hotels) {
-            // Clear loading spinner
-            hotelsGrid.innerHTML = '';
-
-            if (!hotels || hotels.length === 0) {
-                hotelsGrid.innerHTML = `
-            <div class="error-message">
-                <i class="ri-information-line"></i> No hotels available at the moment.
-            </div>
-        `;
-                return;
-            }
-
-            // Static hotel images to use when backend images aren't available
-            const staticImages = [
-                'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070',
-                'https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=2070',
-                'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070',
-                'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070',
-                'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2070'
-            ];
-
-            // Create hotel cards
-            hotels.forEach((hotel, index) => {
-                // Create hotel card
-                const hotelCard = document.createElement('div');
-                hotelCard.className = 'hotel-card';
-
-                // Use static image based on index (cycling through the array)
-                const imageIndex = index % staticImages.length;
-                const imageUrl = staticImages[imageIndex];
-
-                const imageHtml = `
-            <div class="hotel-image">
-                <img src="${imageUrl}" alt="${hotel.name || 'Hotel Image'}">
-            </div>
-        `;
-
-                // Prepare description with fallback
-                const description = hotel.description
-                    ? (hotel.description.length > 150
-                        ? hotel.description.substring(0, 150) + '...'
-                        : hotel.description)
-                    : 'Experience luxury and comfort in this beautiful hotel with stunning views and excellent amenities.';
-
-                // Set hotel card content - using data from backend but with static images
-                hotelCard.innerHTML = `
-            ${imageHtml}
-            <div class="hotel-content">
-                <h3 class="hotel-name">${hotel.name || 'Luxury Beach Resort'}</h3>
-
-                <div class="hotel-location">
-                    <i class="ri-map-pin-line"></i>
-                    ${hotel.location || 'Colombo, Sri Lanka'}
-                </div>
-
-                <p class="hotel-description">${description}</p>
-
-                <div class="hotel-footer">
-                    <a href="roomCard.html?id=${hotel.id}" class="view-details-btn">View Details</a>
-                </div>
-            </div>
-        `;
-
-                // Add card to grid
-                hotelsGrid.appendChild(hotelCard);
-            });
-        }
     });
 </script>
 </body>

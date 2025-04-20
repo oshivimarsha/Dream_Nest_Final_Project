@@ -1,6 +1,7 @@
 package lk.ijse.dreamnest_finalproject.controller;
 
 import lk.ijse.dreamnest_finalproject.dto.ResponseDTO;
+import lk.ijse.dreamnest_finalproject.dto.RoomDTO;
 import lk.ijse.dreamnest_finalproject.dto.RoomTypeDTO;
 import lk.ijse.dreamnest_finalproject.service.RoomTypeService;
 import lk.ijse.dreamnest_finalproject.util.VarList;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/roomType")
