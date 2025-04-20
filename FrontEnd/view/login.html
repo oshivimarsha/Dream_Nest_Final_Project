@@ -227,6 +227,59 @@
                 padding: 2rem;
             }
         }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .resend-container {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        #resend-link.disabled {
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        .form-feedback {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .password-fields input {
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .resend-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        #resend-link.disabled {
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        .form-feedback {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .password-fields input {
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -304,37 +357,38 @@
             <!-- Forgot Password Form -->
             <div class="auth-form" id="forgotForm">
                 <h2 class="form-title">Reset Password</h2>
-                <form action="#">
-                    <div class="form-group">
+                <div class="reset-password-container">
+                    <!-- Step 1: Email Entry -->
+                    <div class="form-group" id="email-container">
                         <input type="email" class="form-control" id="forgotEmail" placeholder="Enter your email" required>
-                    </div>
-                    <button type="button" class="btn" id="send-OTP" onclick="sendOTP()">Send OTP</button>
-
-                    <div class="input-field otp-field hidden" id="otpField">
-                        <input type="text" id="otp" placeholder="Enter OTP" required>
+                        <button type="button" class="btn" id="send-OTP-btn" onclick="sendOTP()">Send OTP</button>
                     </div>
 
-                    <a href="#" id="resend" onclick="resendOTP()" class="auth-form disabled">resend OTP <span id="countdown">30s</span></a>
-                    <button type="submit" class="formbtn hidden" id="submitOTP">Submit OTP</button>
-
-                    <div class="">
-                        <div class="input-field otp-field hidden" id="newPassword">
-                            <input type="text" id="password" placeholder="Enter New Password" required>
+                    <!-- Step 2: OTP Verification -->
+                    <div class="form-group hidden" id="otp-container">
+                        <input type="text" class="form-control" id="otp-input" placeholder="Enter OTP" required>
+                        <div class="resend-container">
+                            <a href="#" id="resend-link" onclick="resendOTP()" class="auth-link">Resend OTP <span id="countdown"></span></a>
+                            <a href="#" id="reset-otp-link" onclick="resetOtpProcess()" class="auth-link">Reset</a>
                         </div>
-
-                        <button type="submit" class="formbtn hidden" id="submitPass">Submit</button>
-
+                        <button type="button" class="btn" id="verify-otp-btn" onclick="verifyOTP()">Verify OTP</button>
                     </div>
 
-
-                   <!-- <div class="or-divider">
-                        <span>OR</span>
+                    <!-- Step 3: New Password -->
+                    <div class="form-group hidden" id="password-container">
+                        <div class="password-fields">
+                            <input type="password" class="form-control" id="new-password" placeholder="Enter New Password" required>
+                            <input type="password" class="form-control" id="confirm-password" placeholder="Confirm New Password" required>
+                        </div>
+                        <button type="button" class="btn" id="reset-password-btn" onclick="resetPassword()">Reset Password</button>
                     </div>
+                </div>
 
--->
-
-                </form>
+                <div class="auth-links">
+                    <a class="auth-link" onclick="showForm('loginForm')">Back to Login</a>
+                </div>
             </div>
+
 
             <!-- Register Form -->
             <div class="auth-form" id="registerForm">

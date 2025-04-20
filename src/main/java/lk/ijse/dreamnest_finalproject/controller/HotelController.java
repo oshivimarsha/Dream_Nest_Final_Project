@@ -6,6 +6,7 @@ import lk.ijse.dreamnest_finalproject.dto.AuthDTO;
 import lk.ijse.dreamnest_finalproject.dto.HotelDTO;
 import lk.ijse.dreamnest_finalproject.dto.ResponseDTO;
 import lk.ijse.dreamnest_finalproject.dto.UserDTO;
+import lk.ijse.dreamnest_finalproject.entity.Place;
 import lk.ijse.dreamnest_finalproject.service.HotelService;
 import lk.ijse.dreamnest_finalproject.util.JwtUtil;
 import lk.ijse.dreamnest_finalproject.util.VarList;
@@ -172,6 +173,8 @@ public class HotelController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
     }
+
+
 }
 
 

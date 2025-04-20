@@ -2,6 +2,7 @@ package lk.ijse.dreamnest_finalproject.service.impl;
 
 import lk.ijse.dreamnest_finalproject.dto.HotelDTO;
 import lk.ijse.dreamnest_finalproject.entity.Hotel;
+import lk.ijse.dreamnest_finalproject.entity.Place;
 import lk.ijse.dreamnest_finalproject.repo.HotelRepository;
 import lk.ijse.dreamnest_finalproject.repo.PlaceRepository;
 import lk.ijse.dreamnest_finalproject.service.HotelService;
@@ -9,6 +10,8 @@ import lk.ijse.dreamnest_finalproject.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HotelServiceIMPL implements HotelService {

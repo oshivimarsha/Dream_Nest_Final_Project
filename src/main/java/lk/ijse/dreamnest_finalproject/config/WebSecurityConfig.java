@@ -52,6 +52,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/v1/password/sentOTP",
+                                "/api/v1/password/resetPassword",
                                 "/api/v1/auth/authenticate",
                                 "/api/v1/user/**",
                                 "/api/v1/auth/refreshToken",
